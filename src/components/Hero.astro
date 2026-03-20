@@ -1,0 +1,167 @@
+---
+import siteConfig from "../../site.config.json";
+---
+
+<section class="hero">
+  <div class="hero-inner container">
+    <div class="hero-mascots">
+      <img
+        src="/images/mascots.webp"
+        alt="Chris the Rooster and Julian the Wolverine"
+        class="mascot-duo"
+        width="320"
+        height="118"
+      />
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">Gas City Hall</h1>
+      <div class="deco-divider"><span class="diamond"></span></div>
+      <p class="hero-tagline">Your city. Your rules.</p>
+      <p class="hero-description">
+        Fully customizable AI agent orchestration.
+        Works with Claude Code, Codex, Gemini and more.
+      </p>
+      <div class="hero-actions">
+        <a href={siteConfig.site.docsUrl} target="_blank" rel="noopener" class="btn btn-primary">
+          Get Started
+        </a>
+        <a href={siteConfig.social.discord} target="_blank" rel="noopener" class="btn btn-secondary">
+          Join Discord
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .hero-mascots {
+    flex-shrink: 0;
+  }
+
+  .mascot-duo {
+    filter: drop-shadow(0 0 20px rgba(201, 168, 76, 0.15));
+    width: 320px;
+    height: auto;
+  }
+
+  .hero-content {
+    flex: 1;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    color: var(--gc-gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-shadow: 0 0 40px rgba(201, 168, 76, 0.2);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--gc-text-bright);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-description {
+    color: var(--gc-text-dim);
+    font-size: 1.05rem;
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.8rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gc-gold), var(--gc-amber));
+    color: var(--gc-black);
+    border: 1px solid var(--gc-gold);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--gc-gold-bright), var(--gc-gold));
+    color: var(--gc-black);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--gc-text);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--gc-gold);
+    color: var(--gc-gold);
+    box-shadow: 0 0 15px rgba(201, 168, 76, 0.1);
+  }
+
+  @media (max-width: 1024px) {
+    .hero-mascots {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 2.5rem 0 2rem;
+      text-align: center;
+    }
+
+    .hero-inner {
+      flex-direction: column;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.3rem;
+    }
+
+    .hero-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-actions {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+</style>

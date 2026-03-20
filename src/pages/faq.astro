@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import siteConfig from "../../site.config.json";
+---
+
+<BaseLayout title="FAQ" description="Frequently asked questions about Gas City.">
+  <section class="page container">
+    <h1 class="section-title">FAQ</h1>
+    <div class="deco-divider"><span class="diamond"></span></div>
+
+    <div class="glass-panel page-panel">
+      <div class="faq-item">
+        <h2>What is Gas City?</h2>
+        <p>
+          Gas City is a fully customizable orchestration layer for AI coding agents.
+          It lets you define your own agents, formulas (orchestrations), and standing
+          orders (automated triggers) to build AI-assisted engineering workflows your way.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2>How is Gas City different from Gas Town?</h2>
+        <p>
+          Gas Town provided a fixed set of agents and orchestrations. Gas City is
+          everything Gas Town was, plus complete customizability. You can run it
+          like Gas Town out of the box, or start from scratch and define your own
+          agents, formulas, orders, and more.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2>Which AI coding agents does Gas City work with?</h2>
+        <p>
+          Gas City works with Claude Code, Codex, Gemini, and more. The
+          architecture is agent-agnostic &mdash; bring whatever tools your team uses.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2>Where can I find the documentation?</h2>
+        <p>
+          Full documentation is available at
+          <a href={siteConfig.site.docsUrl} target="_blank" rel="noopener">{siteConfig.site.docsUrl}</a>.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h2>How do I get involved?</h2>
+        <p>
+          Join our <a href={siteConfig.social.discord} target="_blank" rel="noopener">Discord</a>
+          community, follow updates on <a href={siteConfig.social.x} target="_blank" rel="noopener">X</a>,
+          or contribute on <a href={siteConfig.social.github} target="_blank" rel="noopener">GitHub</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .page-panel {
+    padding: 2.5rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    margin-bottom: 2rem;
+  }
+
+  .faq-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-item h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--gc-gold);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-item p {
+    color: var(--gc-text-dim);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .page-panel {
+      padding: 1.5rem;
+    }
+  }
+</style>

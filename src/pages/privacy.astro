@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Privacy Policy" description="Gas City Hall privacy policy.">
+  <section class="page container">
+    <h1 class="section-title">Privacy Policy</h1>
+    <div class="deco-divider"><span class="diamond"></span></div>
+
+    <div class="glass-panel page-panel">
+      <p class="updated">Last updated: March 19, 2026</p>
+
+      <h2>Overview</h2>
+      <p>
+        Gas City, Inc. ("we", "us", "our") operates the gascityhall.com website.
+        This page informs you of our policies regarding the collection, use, and
+        disclosure of personal information when you use our site.
+      </p>
+
+      <h2>Information Collection</h2>
+      <p>
+        We use Plausible Analytics, a privacy-focused analytics service that does
+        not use cookies and does not collect personal data. No personally
+        identifiable information is gathered through your use of this website.
+      </p>
+
+      <h2>External Links</h2>
+      <p>
+        Our site contains links to external sites (Discord, GitHub, Medium, YouTube)
+        that are not operated by us. We have no control over the content or privacy
+        practices of these sites.
+      </p>
+
+      <h2>Changes</h2>
+      <p>
+        We may update this privacy policy from time to time. We will notify you of
+        any changes by posting the new policy on this page.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        If you have questions about this privacy policy, please reach out via our
+        Discord community.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .page-panel {
+    padding: 2.5rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .page-panel h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--gc-gold);
+    letter-spacing: 0.06em;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-panel p {
+    color: var(--gc-text-dim);
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+  }
+
+  .updated {
+    font-size: 0.85rem;
+    color: var(--gc-silver);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .page-panel {
+      padding: 1.5rem;
+    }
+  }
+</style>

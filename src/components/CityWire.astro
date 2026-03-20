@@ -1,0 +1,110 @@
+---
+import siteConfig from "../../site.config.json";
+
+const posts = siteConfig.blogPosts;
+---
+
+<section class="city-wire container">
+  <h2 class="section-title">City Wire</h2>
+  <p class="section-subtitle">News, dispatches, and field reports</p>
+
+  <div class="wire-grid">
+    {posts.map((post) => (
+      <a href={post.url} target="_blank" rel="noopener" class="wire-card glass-panel">
+        <div class="wire-card-image">
+          <img src={post.image} alt={post.title} width="112" height="112" loading="lazy" />
+        </div>
+        <div class="wire-card-content">
+          <h3 class="wire-card-title">{post.title}</h3>
+          <p class="wire-card-desc">{post.description}</p>
+          <time class="wire-card-date">{post.date}</time>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .city-wire {
+    margin-top: var(--section-gap);
+  }
+
+  .wire-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .wire-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--gc-text);
+    transition: all 0.25s ease;
+    border: 1px solid rgba(201, 168, 76, 0.1);
+  }
+
+  .wire-card:hover {
+    border-color: rgba(201, 168, 76, 0.3);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.05);
+    color: var(--gc-text);
+    transform: translateY(-1px);
+  }
+
+  .wire-card-image {
+    flex-shrink: 0;
+    width: 88px;
+    height: 88px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 168, 76, 0.2);
+  }
+
+  .wire-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wire-card-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .wire-card-title {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gc-text-bright);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+
+  .wire-card-desc {
+    font-size: 0.8rem;
+    color: var(--gc-text-dim);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0.3rem;
+  }
+
+  .wire-card-date {
+    font-size: 0.75rem;
+    color: var(--gc-silver);
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 768px) {
+    .wire-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .wire-card-image {
+      width: 72px;
+      height: 72px;
+    }
+  }
+</style>

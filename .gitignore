@@ -1,0 +1,31 @@
+# build output
+deploy/
+dist/
+
+# dependencies
+node_modules/
+
+# environment
+.env
+.env.*
+
+# astro
+.astro/
+
+# cloudflare
+.wrangler/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+*.swp
+*.swo
+
+# tmp / scratch
+tmp/
+
+# logs
+*.log
+npm-debug.log*

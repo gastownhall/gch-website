@@ -1,0 +1,351 @@
+---
+---
+
+<section class="leaderboard container">
+  <h2 class="section-title">Wasteland Leaderboard</h2>
+  <p class="section-subtitle">Live scoreboard from the Wasteland</p>
+
+  <div class="glass-panel leaderboard-panel">
+    <div id="leaderboard-loading" class="leaderboard-state">
+      <div class="spinner"></div>
+      <p>Loading scoreboard...</p>
+    </div>
+
+    <div id="leaderboard-error" class="leaderboard-state" style="display:none">
+      <p>Unable to load scoreboard data.</p>
+      <a href="https://wasteland.gastownhall.ai" target="_blank" rel="noopener" class="error-link">
+        Visit the Wasteland directly &rarr;
+      </a>
+    </div>
+
+    <!-- Desktop table -->
+    <table id="leaderboard-table" style="display:none">
+      <thead>
+        <tr>
+          <th class="col-rank">#</th>
+          <th class="col-rig">Rig</th>
+          <th class="col-tier">Tier</th>
+          <th class="col-score">Score</th>
+          <th class="col-stamps">Stamps</th>
+          <th class="col-done">Done</th>
+          <th class="col-skills">Skills</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-body"></tbody>
+    </table>
+
+    <!-- Mobile cards -->
+    <div id="leaderboard-cards" style="display:none"></div>
+  </div>
+
+  <div class="leaderboard-cta">
+    <a href="https://wasteland.gastownhall.ai" target="_blank" rel="noopener" class="btn-wasteland">
+      Visit the Wasteland &rarr;
+    </a>
+  </div>
+</section>
+
+<script>
+  const TIER_MAP: Record<string, { label: string; color: string }> = {
+    imperator: { label: "Imperator", color: "#e8c84a" },
+    warrior: { label: "Warrior", color: "#b8862d" },
+    settler: { label: "Settler", color: "#b8c0cc" },
+    scavenger: { label: "Scavenger", color: "#8a92a1" },
+    drifter: { label: "Drifter", color: "#6a6660" },
+  };
+
+  const RANK_MEDALS: Record<number, string> = { 1: "\u{1F947}", 2: "\u{1F948}", 3: "\u{1F949}" };
+
+  interface ScoreboardEntry {
+    rig_name: string;
+    tier: string;
+    score: number;
+    stamps: number;
+    done: number;
+    skills: number;
+    profile_url?: string;
+  }
+
+  function createTierBadge(tierKey: string): HTMLSpanElement {
+    const tier = TIER_MAP[tierKey?.toLowerCase()] || TIER_MAP.drifter;
+    const badge = document.createElement("span");
+    badge.className = "tier-badge";
+    badge.style.color = tier.color;
+    badge.style.borderColor = tier.color;
+    badge.textContent = tier.label;
+    return badge;
+  }
+
+  function buildTableRow(entry: ScoreboardEntry, rank: number): HTMLTableRowElement {
+    const tr = document.createElement("tr");
+    tr.className = rank <= 3 ? `rank-${rank}` : "rank-default";
+    const profileUrl = entry.profile_url || "#";
+    tr.addEventListener("click", () => window.open(profileUrl, "_blank"));
+
+    const tdRank = document.createElement("td");
+    tdRank.className = "col-rank";
+    tdRank.textContent = RANK_MEDALS[rank] || String(rank);
+    tr.appendChild(tdRank);
+
+    const tdRig = document.createElement("td");
+    tdRig.className = "col-rig";
+    tdRig.textContent = entry.rig_name;
+    tr.appendChild(tdRig);
+
+    const tdTier = document.createElement("td");
+    tdTier.className = "col-tier";
+    tdTier.appendChild(createTierBadge(entry.tier));
+    tr.appendChild(tdTier);
+
+    for (const val of [entry.score, entry.stamps, entry.done, entry.skills]) {
+      const td = document.createElement("td");
+      td.className = "col-score";
+      td.textContent = val.toLocaleString();
+      tr.appendChild(td);
+    }
+
+    return tr;
+  }
+
+  function buildCard(entry: ScoreboardEntry, rank: number): HTMLAnchorElement {
+    const card = document.createElement("a");
+    card.href = entry.profile_url || "#";
+    card.target = "_blank";
+    card.rel = "noopener";
+    card.className = `lb-card ${rank <= 3 ? `rank-${rank}` : "rank-default"}`;
+
+    const header = document.createElement("div");
+    header.className = "lb-card-header";
+
+    const rankSpan = document.createElement("span");
+    rankSpan.className = "lb-card-rank";
+    rankSpan.textContent = RANK_MEDALS[rank] || `#${rank}`;
+    header.appendChild(rankSpan);
+
+    const rigSpan = document.createElement("span");
+    rigSpan.className = "lb-card-rig";
+    rigSpan.textContent = entry.rig_name;
+    header.appendChild(rigSpan);
+
+    header.appendChild(createTierBadge(entry.tier));
+    card.appendChild(header);
+
+    const stats = document.createElement("div");
+    stats.className = "lb-card-stats";
+    for (const [label, val] of [["Score", entry.score], ["Stamps", entry.stamps], ["Done", entry.done], ["Skills", entry.skills]]) {
+      const span = document.createElement("span");
+      const strong = document.createElement("strong");
+      strong.textContent = (val as number).toLocaleString();
+      span.textContent = `${label}: `;
+      span.appendChild(strong);
+      stats.appendChild(span);
+    }
+    card.appendChild(stats);
+
+    return card;
+  }
+
+  async function loadLeaderboard() {
+    const loading = document.getElementById("leaderboard-loading")!;
+    const error = document.getElementById("leaderboard-error")!;
+    const table = document.getElementById("leaderboard-table")!;
+    const cards = document.getElementById("leaderboard-cards")!;
+    const tbody = document.getElementById("leaderboard-body")!;
+
+    const res = await fetch("https://wasteland.gastownhall.ai/api/scoreboard");
+    const data: ScoreboardEntry[] = await res.json();
+
+    loading.style.display = "none";
+
+    if (!data || data.length === 0) {
+      error.style.display = "flex";
+      return;
+    }
+
+    data.forEach((entry, i) => {
+      const rank = i + 1;
+      tbody.appendChild(buildTableRow(entry, rank));
+      cards.appendChild(buildCard(entry, rank));
+    });
+
+    table.style.display = "";
+    cards.style.display = "";
+  }
+
+  loadLeaderboard().catch(() => {
+    document.getElementById("leaderboard-loading")!.style.display = "none";
+    document.getElementById("leaderboard-error")!.style.display = "flex";
+  });
+</script>
+
+<style>
+  .leaderboard {
+    margin-top: var(--section-gap);
+  }
+
+  .leaderboard-panel {
+    padding: 1.5rem;
+    overflow-x: auto;
+  }
+
+  .leaderboard-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem 1rem;
+    color: var(--gc-text-dim);
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(201, 168, 76, 0.2);
+    border-top-color: var(--gc-gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .error-link {
+    color: var(--gc-gold);
+    font-size: 0.9rem;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gc-text-dim);
+    padding: 0.75rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  }
+
+  td {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  tr {
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  tr:hover {
+    background: rgba(201, 168, 76, 0.06);
+  }
+
+  .rank-1 { background: rgba(232, 200, 74, 0.05); }
+  .rank-2 { background: rgba(184, 192, 204, 0.05); }
+  .rank-3 { background: rgba(184, 134, 45, 0.05); }
+
+  .col-rank { width: 3rem; text-align: center; }
+  .col-score { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .tier-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid;
+    border-radius: 2px;
+  }
+
+  /* Mobile cards */
+  #leaderboard-cards {
+    display: none !important;
+  }
+
+  .lb-card {
+    display: block;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+    color: var(--gc-text);
+    transition: background 0.15s ease;
+  }
+
+  .lb-card:hover {
+    background: rgba(201, 168, 76, 0.06);
+    color: var(--gc-text);
+  }
+
+  .lb-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .lb-card-rank {
+    font-size: 1.1rem;
+    min-width: 2rem;
+  }
+
+  .lb-card-rig {
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .lb-card-stats {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--gc-text-dim);
+    padding-left: 2.75rem;
+  }
+
+  /* CTA */
+  .leaderboard-cta {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+
+  .btn-wasteland {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gc-gold);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 3px;
+    transition: all 0.25s ease;
+  }
+
+  .btn-wasteland:hover {
+    border-color: var(--gc-gold);
+    box-shadow: 0 0 15px rgba(201, 168, 76, 0.15);
+    color: var(--gc-gold-bright);
+  }
+
+  @media (max-width: 768px) {
+    table, #leaderboard-table {
+      display: none !important;
+    }
+
+    #leaderboard-cards {
+      display: block !important;
+    }
+
+    .lb-card-stats {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+</style>
