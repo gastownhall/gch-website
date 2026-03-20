@@ -26,7 +26,17 @@ Gas City Hall website (gascityhall.com) — the community hub for Gas City, a cu
 
 ### Design system
 
-All CSS custom properties live in `BaseLayout.astro` under `:root`. The palette (`--gc-gold`, `--gc-chrome`, `--gc-blue`, etc.), fonts (`--font-display: Cinzel`, `--font-body: Raleway`), and shared classes (`.glass-panel`, `.deco-divider`, `.section-title`, `.container`) are defined there. Components use scoped `<style>` blocks.
+All CSS is centralized in `BaseLayout.astro`. The `<style is:global>` block contains:
+
+- **Custom properties** (`:root`) — palette (`--gc-gold`, `--gc-chrome`, `--gc-blue`, etc.), fonts (`--font-display: Cinzel`, `--font-body: Raleway`), spacing
+- **Shared layout classes** — `.container`, `.glass-panel`, `.deco-divider`, `.section-title`, `.section-subtitle`
+- **Page layout** — `.page`, `.page-panel`, `.page-panel h2/p`, `.updated` (used by about, privacy, terms)
+- **Button system** — `.btn` (base), `.btn-primary`, `.btn-secondary`, `.btn-outline`
+- **Responsive breakpoints** — mobile overrides at 768px
+
+Components use scoped `<style>` blocks only for component-specific styles (e.g. team grid, leaderboard table). Do not duplicate base layout, button, or page styles in component files — they belong in BaseLayout.
+
+The Wasteland Leaderboard uses `<style is:global>` because its DOM is built client-side via JavaScript, so Astro's scoped style attributes aren't applied to those elements. All leaderboard global selectors are scoped under the `.leaderboard` class to prevent leaking.
 
 ### Dynamic content
 
