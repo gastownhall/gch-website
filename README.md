@@ -18,6 +18,7 @@ npm run dev
 | `npm run dev` | Start dev server |
 | `npm run build` | Typecheck + build to `./deploy/` |
 | `npm run preview` | Preview production build locally |
+| `npm run deploy` | Build + deploy to Cloudflare Pages |
 
 ## Stack
 

@@ -3,6 +3,12 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://gascityhall.com",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      changefreq: "weekly",
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
+  ],
   outDir: "./deploy",
 });

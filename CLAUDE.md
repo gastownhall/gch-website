@@ -11,6 +11,7 @@ Gas City Hall website (gascityhall.com) — the community hub for Gas City, a cu
 - `npm run dev` — start dev server
 - `npm run build` — typecheck + build to `./deploy/`
 - `npm run preview` — preview production build locally
+- `npm run deploy` — build + deploy to Cloudflare Pages via wrangler
 
 ## Architecture
 
@@ -20,9 +21,11 @@ Gas City Hall website (gascityhall.com) — the community hub for Gas City, a cu
 
 - `site.config.json` — all site metadata, social links, analytics config, and blog post entries. Components import this directly. To add a blog post, add an entry here.
 - `astro.config.mjs` — Astro config. Build output goes to `./deploy/`.
-- `src/layouts/BaseLayout.astro` — single layout wrapping all pages. Contains the full CSS design system (custom properties, global styles), header, footer, Google Fonts, Plausible analytics, and OG/Twitter meta tags.
+- `src/layouts/BaseLayout.astro` — single layout wrapping all pages. Contains the full CSS design system (custom properties, global styles), header, footer, Google Fonts, Plausible analytics, OG/Twitter meta tags, JSON-LD structured data, and SEO meta tags.
 - `src/components/` — Hero, WastelandLeaderboard, CityWire (blog), Community sections.
-- `src/pages/` — index, about, privacy, terms.
+- `src/pages/` — index, about, privacy, terms, rss.xml.
+- `public/_headers` — Cloudflare Pages security headers and cache control.
+- `public/robots.txt` — search engine crawling directives.
 
 ### Design system
 
