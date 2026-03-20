@@ -17,6 +17,10 @@ Gas City Hall website (gascityhall.com) — the community hub for Gas City, a cu
 
 **Astro 5 static site** deployed to Cloudflare Pages. No client-side framework — pages are static HTML with one client-side script (leaderboard fetch).
 
+### Deployment
+
+Pushing to `main` triggers an automatic build and deploy to gascityhall.com via Cloudflare Pages (GitHub integration). Manual deploy is also available via `npm run deploy` (requires `wrangler login` first). The Cloudflare Pages project name is `gch-website`.
+
 ### Key files
 
 - `site.config.json` — all site metadata, social links, analytics config, and blog post entries. Components import this directly. To add a blog post, add an entry here.

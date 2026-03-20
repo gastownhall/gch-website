@@ -20,10 +20,14 @@ npm run dev
 | `npm run preview` | Preview production build locally |
 | `npm run deploy` | Build + deploy to Cloudflare Pages |
 
+## Deployment
+
+Pushing to `main` automatically builds and deploys to [gascityhall.com](https://gascityhall.com) via Cloudflare Pages. Manual deploy is also available via `npm run deploy`.
+
 ## Stack
 
 - [Astro 5](https://astro.build) — static site generator
-- [Cloudflare Pages](https://pages.cloudflare.com) — hosting
+- [Cloudflare Pages](https://pages.cloudflare.com) — hosting (auto-deploy on push)
 - [Plausible](https://plausible.io) — privacy-focused analytics
 
 ## Configuration
