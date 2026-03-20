@@ -2,20 +2,21 @@
 import siteConfig from "../../site.config.json";
 ---
 
-<section class="hero">
-  <div class="hero-inner container">
+<section class="hero container">
+  <h1 class="section-title">Gas City Hall</h1>
+  <div class="deco-divider"><span class="diamond"></span></div>
+
+  <div class="hero-inner">
     <div class="hero-mascots">
       <img
         src="/images/mascots.webp"
         alt="Chris the Rooster and Julian the Wolverine"
         class="mascot-duo"
         width="320"
-        height="118"
+        height="179"
       />
     </div>
     <div class="hero-content">
-      <h1 class="hero-title">Gas City Hall</h1>
-      <div class="deco-divider"><span class="diamond"></span></div>
       <p class="hero-tagline">Your city. Your rules.</p>
       <p class="hero-description">
         Fully customizable AI agent orchestration.
@@ -56,16 +57,6 @@ import siteConfig from "../../site.config.json";
 
   .hero-content {
     flex: 1;
-  }
-
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: 3.5rem;
-    color: var(--gc-gold);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    line-height: 1.1;
-    text-shadow: 0 0 40px rgba(201, 168, 76, 0.2);
   }
 
   .hero-tagline {
@@ -144,10 +135,6 @@ import siteConfig from "../../site.config.json";
 
     .hero-inner {
       flex-direction: column;
-    }
-
-    .hero-title {
-      font-size: 2.2rem;
     }
 
     .hero-tagline {

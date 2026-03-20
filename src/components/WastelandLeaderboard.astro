@@ -51,19 +51,24 @@
     warrior: { label: "Warrior", color: "#b8862d" },
     settler: { label: "Settler", color: "#b8c0cc" },
     scavenger: { label: "Scavenger", color: "#8a92a1" },
+    outsider: { label: "Outsider", color: "#7a9a6a" },
     drifter: { label: "Drifter", color: "#6a6660" },
   };
 
   const RANK_MEDALS: Record<number, string> = { 1: "\u{1F947}", 2: "\u{1F948}", 3: "\u{1F949}" };
 
   interface ScoreboardEntry {
-    rig_name: string;
-    tier: string;
-    score: number;
-    stamps: number;
-    done: number;
-    skills: number;
-    profile_url?: string;
+    rig_handle: string;
+    display_name: string;
+    trust_tier: string;
+    stamp_count: number;
+    weighted_score: number;
+    unique_towns: number;
+    completions: number;
+    avg_quality: number;
+    avg_reliability: number;
+    avg_creativity: number;
+    top_skills: string[];
   }
 
   function createTierBadge(tierKey: string): HTMLSpanElement {
@@ -76,11 +81,14 @@
     return badge;
   }
 
+  function profileUrl(handle: string): string {
+    return `https://wasteland.gastownhall.ai/rig/${handle}`;
+  }
+
   function buildTableRow(entry: ScoreboardEntry, rank: number): HTMLTableRowElement {
     const tr = document.createElement("tr");
     tr.className = rank <= 3 ? `rank-${rank}` : "rank-default";
-    const profileUrl = entry.profile_url || "#";
-    tr.addEventListener("click", () => window.open(profileUrl, "_blank"));
+    tr.addEventListener("click", () => window.open(profileUrl(entry.rig_handle), "_blank"));
 
     const tdRank = document.createElement("td");
     tdRank.className = "col-rank";
@@ -89,15 +97,15 @@
 
     const tdRig = document.createElement("td");
     tdRig.className = "col-rig";
-    tdRig.textContent = entry.rig_name;
+    tdRig.textContent = entry.display_name || entry.rig_handle;
     tr.appendChild(tdRig);
 
     const tdTier = document.createElement("td");
     tdTier.className = "col-tier";
-    tdTier.appendChild(createTierBadge(entry.tier));
+    tdTier.appendChild(createTierBadge(entry.trust_tier));
     tr.appendChild(tdTier);
 
-    for (const val of [entry.score, entry.stamps, entry.done, entry.skills]) {
+    for (const val of [entry.weighted_score, entry.stamp_count, entry.completions, entry.top_skills.length]) {
       const td = document.createElement("td");
       td.className = "col-score";
       td.textContent = val.toLocaleString();
@@ -109,7 +117,7 @@
 
   function buildCard(entry: ScoreboardEntry, rank: number): HTMLAnchorElement {
     const card = document.createElement("a");
-    card.href = entry.profile_url || "#";
+    card.href = profileUrl(entry.rig_handle);
     card.target = "_blank";
     card.rel = "noopener";
     card.className = `lb-card ${rank <= 3 ? `rank-${rank}` : "rank-default"}`;
@@ -124,15 +132,15 @@
 
     const rigSpan = document.createElement("span");
     rigSpan.className = "lb-card-rig";
-    rigSpan.textContent = entry.rig_name;
+    rigSpan.textContent = entry.display_name || entry.rig_handle;
     header.appendChild(rigSpan);
 
-    header.appendChild(createTierBadge(entry.tier));
+    header.appendChild(createTierBadge(entry.trust_tier));
     card.appendChild(header);
 
     const stats = document.createElement("div");
     stats.className = "lb-card-stats";
-    for (const [label, val] of [["Score", entry.score], ["Stamps", entry.stamps], ["Done", entry.done], ["Skills", entry.skills]]) {
+    for (const [label, val] of [["Score", entry.weighted_score], ["Stamps", entry.stamp_count], ["Done", entry.completions], ["Skills", entry.top_skills.length]]) {
       const span = document.createElement("span");
       const strong = document.createElement("strong");
       strong.textContent = (val as number).toLocaleString();
@@ -153,11 +161,12 @@
     const tbody = document.getElementById("leaderboard-body")!;
 
     const res = await fetch("https://wasteland.gastownhall.ai/api/scoreboard");
-    const data: ScoreboardEntry[] = await res.json();
+    const json = await res.json();
+    const data: ScoreboardEntry[] = json.entries || [];
 
     loading.style.display = "none";
 
-    if (!data || data.length === 0) {
+    if (data.length === 0) {
       error.style.display = "flex";
       return;
     }

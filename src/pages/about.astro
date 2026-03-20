@@ -25,14 +25,14 @@ import siteConfig from "../../site.config.json";
       <h2>The Team</h2>
       <div class="team-grid">
         <div class="team-member">
-          <img src="/images/rooster-chris.jpg" alt="Chris" width="120" height="150" />
-          <h3>Chris Sells</h3>
-          <p>Co-founder</p>
+          <img src="/images/rooster-chris.jpg" alt="Chris" width="280" height="350" />
+          <h3><a href="https://github.com/csells" target="_blank" rel="noopener">Chris Sells</a></h3>
+          <p>Gas Town Hall owner and proprietor</p>
         </div>
         <div class="team-member">
-          <img src="/images/wolverine-julian.png" alt="Julian" width="120" height="150" />
-          <h3>Julian</h3>
-          <p>Co-founder</p>
+          <img src="/images/wolverine-julian.png" alt="Julian Knutsen" width="280" height="350" />
+          <h3><a href="https://github.com/julianknutsen" target="_blank" rel="noopener">Julian Knutsen</a></h3>
+          <p>Gas City and Wasteland creator</p>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ import siteConfig from "../../site.config.json";
 
   .team-grid {
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
     justify-content: center;
     margin: 1.5rem 0;
   }
@@ -89,16 +89,25 @@ import siteConfig from "../../site.config.json";
   }
 
   .team-member img {
-    width: 120px;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
-    filter: drop-shadow(0 0 15px rgba(201, 168, 76, 0.1));
+    width: 280px;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    filter: drop-shadow(0 0 20px rgba(201, 168, 76, 0.15));
   }
 
   .team-member h3 {
     font-size: 1rem;
-    color: var(--gc-text-bright);
     margin-bottom: 0.2rem;
+  }
+
+  .team-member h3 a {
+    color: var(--gc-text-bright);
+    transition: color 0.2s ease;
+  }
+
+  .team-member h3 a:hover {
+    color: var(--gc-gold);
   }
 
   .team-member p {
