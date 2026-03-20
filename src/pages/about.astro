@@ -9,17 +9,19 @@ import siteConfig from "../../site.config.json";
     <div class="deco-divider"><span class="diamond"></span></div>
 
     <div class="glass-panel page-panel">
-      <h2>What is Gas City?</h2>
+      <h2>What is Gas City Hall?</h2>
       <p>
-        Gas City is a fully customizable orchestration layer for AI coding agents.
-        It works with Claude Code, Codex, Gemini, and more. Define your own agents,
-        create your own formulas (orchestrations), set up standing orders (cron jobs),
-        and build exactly the AI engineering workflow you need.
+        Gas City Hall is the community hub for
+        <a href={siteConfig.social.github} target="_blank" rel="noopener">Gas City</a>,
+        a fully customizable orchestration layer for AI coding agents. Gas City helps
+        you track accountability, measure quality, and scale your AI-assisted
+        engineering workflows. It works with Claude Code, Codex, Gemini, and more.
       </p>
       <p>
         Gas City evolved from Gas Town, adding complete customizability on top of
         the proven orchestration foundation. Out of the box it works like Gas Town,
-        but you can configure every aspect to match your team and workflow.
+        but you can define your own agents, formulas (orchestrations), standing orders
+        (cron jobs), and build exactly the AI engineering workflow you need.
       </p>
 
       <h2>The Team</h2>
@@ -42,6 +44,14 @@ import siteConfig from "../../site.config.json";
         follow us on <a href={siteConfig.social.x} target="_blank" rel="noopener">X</a>,
         or contribute on <a href={siteConfig.social.github} target="_blank" rel="noopener">GitHub</a>.
       </p>
+
+      <h2>Contact</h2>
+      <p>
+        For support, questions, or feedback, reach us at
+        <a href="mailto:csells@gascity.ai">csells@gascity.ai</a>,
+        on <a href={siteConfig.social.discord} target="_blank" rel="noopener">Discord</a>,
+        or on <a href={siteConfig.social.x} target="_blank" rel="noopener">X</a>.
+      </p>
     </div>
   </section>
 </BaseLayout>
@@ -60,7 +70,8 @@ import siteConfig from "../../site.config.json";
 
   .page-panel h2 {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.7rem;
+    font-weight: 700;
     color: var(--gc-gold);
     letter-spacing: 0.08em;
     margin-top: 2rem;
@@ -111,7 +122,7 @@ import siteConfig from "../../site.config.json";
   }
 
   .team-member p {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: var(--gc-text-dim);
   }
 

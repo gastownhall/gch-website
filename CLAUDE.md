@@ -22,11 +22,11 @@ Gas City Hall website (gascityhall.com) — the community hub for Gas City, a cu
 - `astro.config.mjs` — Astro config. Build output goes to `./deploy/`.
 - `src/layouts/BaseLayout.astro` — single layout wrapping all pages. Contains the full CSS design system (custom properties, global styles), header, footer, Google Fonts, Plausible analytics, and OG/Twitter meta tags.
 - `src/components/` — Hero, WastelandLeaderboard, CityWire (blog), Community sections.
-- `src/pages/` — index, about, faq, privacy, terms.
+- `src/pages/` — index, about, privacy, terms.
 
 ### Design system
 
-All CSS custom properties live in `BaseLayout.astro` under `:root`. The palette (`--gc-gold`, `--gc-chrome`, `--gc-blue`, etc.), fonts (`--font-display: Poiret One`, `--font-body: Raleway`), and shared classes (`.glass-panel`, `.deco-divider`, `.section-title`, `.container`) are defined there. Components use scoped `<style>` blocks.
+All CSS custom properties live in `BaseLayout.astro` under `:root`. The palette (`--gc-gold`, `--gc-chrome`, `--gc-blue`, etc.), fonts (`--font-display: Cinzel`, `--font-body: Raleway`), and shared classes (`.glass-panel`, `.deco-divider`, `.section-title`, `.container`) are defined there. Components use scoped `<style>` blocks.
 
 ### Dynamic content
 

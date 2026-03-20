@@ -28,7 +28,7 @@ const pageDescription = description || siteConfig.site.description;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Raleway:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -91,7 +91,7 @@ const pageDescription = description || siteConfig.site.description;
           <span class="footer-sep">|</span>
           <a href="/about">About</a>
         </div>
-        <p class="footer-copy">&copy; {new Date().getFullYear()} Gas City, Inc. All rights reserved.</p>
+        <p class="footer-copy">&copy; {new Date().getFullYear()} Gas City Hall. All rights reserved.</p>
       </div>
     </footer>
   </body>
@@ -125,15 +125,15 @@ const pageDescription = description || siteConfig.site.description;
     --gc-neon: #6bb5cc;
 
     /* Text */
-    --gc-text: #e8e4dc;
-    --gc-text-dim: #9a968e;
-    --gc-text-bright: #f5f0e8;
+    --gc-text: #f0ece4;
+    --gc-text-dim: #c8c2b6;
+    --gc-text-bright: #f8f4ec;
 
     /* Discord */
     --gc-discord: #5865f2;
 
     /* Fonts */
-    --font-display: "Poiret One", "Didot", serif;
+    --font-display: "Cinzel", "Didot", serif;
     --font-body: "Raleway", "Helvetica Neue", sans-serif;
     --font-mono: "JetBrains Mono", monospace;
 
@@ -157,6 +157,7 @@ const pageDescription = description || siteConfig.site.description;
   body {
     font-family: var(--font-body);
     font-weight: 400;
+    font-size: 1.2rem;
     color: var(--gc-text);
     background: var(--gc-black);
     line-height: 1.6;
@@ -230,7 +231,8 @@ const pageDescription = description || siteConfig.site.description;
   /* ---- Section styling ---- */
   .section-title {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 2.4rem;
+    font-weight: 700;
     color: var(--gc-gold);
     text-align: center;
     letter-spacing: 0.15em;
@@ -242,7 +244,7 @@ const pageDescription = description || siteConfig.site.description;
     text-align: center;
     color: var(--gc-text-dim);
     font-weight: 300;
-    font-size: 0.95rem;
+    font-size: 1.15rem;
     margin-bottom: 2rem;
   }
 
@@ -333,7 +335,7 @@ const pageDescription = description || siteConfig.site.description;
 
   .site-nav a {
     color: var(--gc-text-dim);
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     display: flex;
@@ -364,7 +366,7 @@ const pageDescription = description || siteConfig.site.description;
 
   .footer-links a {
     color: var(--gc-text-dim);
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
 
   .footer-links a:hover {
@@ -378,7 +380,7 @@ const pageDescription = description || siteConfig.site.description;
 
   .footer-copy {
     color: var(--gc-text-dim);
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     opacity: 0.7;
   }
 
@@ -392,7 +394,7 @@ const pageDescription = description || siteConfig.site.description;
     }
 
     .site-nav a {
-      font-size: 0.8rem;
+      font-size: 0.95rem;
     }
   }
 </style>
