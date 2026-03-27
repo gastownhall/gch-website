@@ -20,11 +20,13 @@ node_modules/
 Thumbs.db
 
 # editor
+.vscode/
 *.swp
 *.swo
 
 # tmp / scratch
 tmp/
+.agents/migration/
 
 # logs
 *.log
