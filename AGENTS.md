@@ -61,6 +61,6 @@ The Wasteland Leaderboard fetches from `https://wasteland.gastownhall.ai/api/sco
 
 ### Images
 
-Static images in `public/images/`. Web-optimized source images come from the gas-city-inc repo. The `.claude/skills/web-image-optimize/` skill handles batch optimization from source PNGs via a JSON spec file.
+Static images in `public/images/`. Web-optimized source images come from the gas-city-inc repo. Use the global `graphics-optimize-web-images` skill when batch-optimizing source PNGs from a JSON spec file.
 
 Blog thumbnails are in `public/images/blog/` and referenced by path in `site.config.json`.
