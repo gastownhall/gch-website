@@ -19,14 +19,18 @@ import siteConfig from "../../site.config.json";
     <div class="hero-content">
       <p class="hero-tagline">Your city. Your rules.</p>
       <p class="hero-description">
-        Fully customizable AI agent orchestration.
-        Works with Claude Code, Codex, Gemini and more.
+        Fully customizable AI agent orchestration. Works with Claude Code, Codex, Gemini and more.
       </p>
       <div class="hero-actions">
         <a href={siteConfig.site.docsUrl} target="_blank" rel="noopener" class="btn btn-primary">
           Get Started
         </a>
-        <a href={siteConfig.social.discord} target="_blank" rel="noopener" class="btn btn-secondary">
+        <a
+          href={siteConfig.social.discord}
+          target="_blank"
+          rel="noopener"
+          class="btn btn-secondary"
+        >
           Join Discord
         </a>
       </div>
@@ -80,7 +84,6 @@ import siteConfig from "../../site.config.json";
     display: flex;
     gap: 1rem;
   }
-
 
   @media (max-width: 1024px) {
     .hero-mascots {

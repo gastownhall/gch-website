@@ -22,6 +22,9 @@ Gas City Hall website (gascityhall.com) — the community hub for Gas City, a cu
 - `npm run build` — typecheck + build to `./deploy/`
 - `npm run preview` — preview production build locally
 - `npm run deploy` — build + deploy to Cloudflare Pages via wrangler
+- `npm run lint` — run ESLint across the repo
+- `npm run format` — run Prettier across the repo
+- `npm run check` — run lint, format:check, build, and `npm audit --audit-level=info`
 
 ## Architecture
 
@@ -68,3 +71,9 @@ Blog thumbnails are in `public/images/blog/` and referenced by path in `site.con
 ### Project skills
 
 This repo has a project-local `add-content` skill in `.claude/skills/add-content/` for adding new Steve Yegge Medium posts. It updates `site.config.json` and downloads matching thumbnails into `public/images/blog/`.
+
+## Git Workflow
+
+Do NOT commit or push until explicitly asked by the user.
+
+**Pre-commit hook:** Husky auto-formats with `npm run format`, re-stages the result, then runs `npm run check` on every commit. Keep `npm audit` clean at the `info` threshold so the local gate stays green.

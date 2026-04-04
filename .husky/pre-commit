@@ -1,0 +1,6 @@
+# Auto-format files and re-stage any changes
+npm run format
+git add -u
+
+# Run the strict local gate on every commit.
+npm run check

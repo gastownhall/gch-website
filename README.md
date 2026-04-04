@@ -13,12 +13,12 @@ npm run dev
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Typecheck + build to `./deploy/` |
-| `npm run preview` | Preview production build locally |
-| `npm run deploy` | Build + deploy to Cloudflare Pages |
+| Command           | Description                        |
+| ----------------- | ---------------------------------- |
+| `npm run dev`     | Start dev server                   |
+| `npm run build`   | Typecheck + build to `./deploy/`   |
+| `npm run preview` | Preview production build locally   |
+| `npm run deploy`  | Build + deploy to Cloudflare Pages |
 
 ## Deployment
 

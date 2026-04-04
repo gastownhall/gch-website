@@ -1,4 +1,5 @@
 ---
+
 ---
 
 <section class="leaderboard container">
@@ -153,7 +154,11 @@
 
     const stats = document.createElement("div");
     stats.className = "lb-card-stats";
-    for (const [label, val] of [["Score", entry.weighted_score], ["Stamps", entry.stamp_count], ["Done", entry.completions]] as const) {
+    for (const [label, val] of [
+      ["Score", entry.weighted_score],
+      ["Stamps", entry.stamp_count],
+      ["Done", entry.completions],
+    ] as const) {
       const span = document.createElement("span");
       const strong = document.createElement("strong");
       strong.textContent = String(val);
@@ -246,7 +251,9 @@
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .error-link {
@@ -286,13 +293,28 @@
     background: rgba(201, 168, 76, 0.06);
   }
 
-  .rank-1 { background: rgba(232, 200, 74, 0.05); }
-  .rank-2 { background: rgba(184, 192, 204, 0.05); }
-  .rank-3 { background: rgba(184, 134, 45, 0.05); }
+  .rank-1 {
+    background: rgba(232, 200, 74, 0.05);
+  }
+  .rank-2 {
+    background: rgba(184, 192, 204, 0.05);
+  }
+  .rank-3 {
+    background: rgba(184, 134, 45, 0.05);
+  }
 
-  .leaderboard .col-rank { width: 3rem; text-align: center; }
-  .leaderboard .col-tier { text-align: center; }
-  .leaderboard .col-num { text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .leaderboard .col-rank {
+    width: 3rem;
+    text-align: center;
+  }
+  .leaderboard .col-tier {
+    text-align: center;
+  }
+  .leaderboard .col-num {
+    text-align: center;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
 
   .entry-display-name {
     font-weight: 600;
@@ -400,9 +422,9 @@
     margin-bottom: 2rem;
   }
 
-
   @media (max-width: 768px) {
-    table, #leaderboard-table {
+    table,
+    #leaderboard-table {
       display: none !important;
     }
 

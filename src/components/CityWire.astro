@@ -9,18 +9,20 @@ const posts = siteConfig.blogPosts;
   <p class="section-subtitle">News, dispatches, and field reports</p>
 
   <div class="wire-grid">
-    {posts.map((post) => (
-      <a href={post.url} target="_blank" rel="noopener" class="wire-card glass-panel">
-        <div class="wire-card-image">
-          <img src={post.image} alt={post.title} width="112" height="112" loading="lazy" />
-        </div>
-        <div class="wire-card-content">
-          <h3 class="wire-card-title">{post.title}</h3>
-          <p class="wire-card-desc">{post.description}</p>
-          <time class="wire-card-date">{post.date}</time>
-        </div>
-      </a>
-    ))}
+    {
+      posts.map((post) => (
+        <a href={post.url} target="_blank" rel="noopener" class="wire-card glass-panel">
+          <div class="wire-card-image">
+            <img src={post.image} alt={post.title} width="112" height="112" loading="lazy" />
+          </div>
+          <div class="wire-card-content">
+            <h3 class="wire-card-title">{post.title}</h3>
+            <p class="wire-card-desc">{post.description}</p>
+            <time class="wire-card-date">{post.date}</time>
+          </div>
+        </a>
+      ))
+    }
   </div>
 </section>
 
