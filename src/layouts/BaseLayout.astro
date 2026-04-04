@@ -127,11 +127,12 @@ const schemas = isHomePage
 
     <!-- JSON-LD Structured Data -->
     {schemas.map((schema) => (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
 
     <!-- Plausible Analytics -->
     <script
+      is:inline
       defer
       data-domain={siteConfig.analytics.plausibleDomain}
       src={siteConfig.analytics.plausibleScript}

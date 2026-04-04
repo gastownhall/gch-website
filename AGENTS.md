@@ -64,3 +64,7 @@ The Wasteland Leaderboard fetches from `https://wasteland.gastownhall.ai/api/sco
 Static images in `public/images/`. Web-optimized source images come from the gas-city-inc repo. Use the global `optimize-image-web` skill when batch-optimizing source PNGs from a JSON spec file.
 
 Blog thumbnails are in `public/images/blog/` and referenced by path in `site.config.json`.
+
+### Project skills
+
+This repo has a project-local `add-content` skill in `.claude/skills/add-content/` for adding new Steve Yegge Medium posts. It updates `site.config.json` and downloads matching thumbnails into `public/images/blog/`.
